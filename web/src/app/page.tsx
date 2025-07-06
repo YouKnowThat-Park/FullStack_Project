@@ -1,3 +1,9 @@
+import HomeUi from "./home/HomeUi";
+
 export default function Home() {
-  return <div></div>;
+  return (
+    <div>
+      <HomeUi />
+    </div>
+  );
 }
