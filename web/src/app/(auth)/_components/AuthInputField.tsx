@@ -3,20 +3,24 @@ import { forwardRef } from "react";
 export interface AuthInputField {
   label: string;
   type: string;
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+  name?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 // React Hook From으로 넘겨주기 위해선 forwardRef가 꼭 필요
 export const AuthInputField = forwardRef<HTMLInputElement, AuthInputField>(
-  ({ label, type, value, onChange }, ref) => {
+  ({ label, name, type, value, onChange, onBlur }, ref) => {
     return (
       <div>
         <label>{label}</label>
         <input
+          name={name}
           ref={ref}
           type={type}
-          value={value ?? ""}
+          value={value}
+          onBlur={onBlur}
           onChange={onChange}
           className="border"
         />

@@ -1,5 +1,66 @@
-import React from "react";
+"use client";
+import React, { useRef, useState } from "react";
+import { AuthInputField } from "../_components/AuthInputField";
+import { useForm } from "react-hook-form";
+
+interface SignupFormValues {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  phone_number: string;
+  birth_date: string;
+}
 
 export default function page() {
-  return <div>page</div>;
+  const { register, handleSubmit, reset } = useForm<SignupFormValues>();
+
+  const onSubmit = async (data: SignupFormValues) => {
+    try {
+      const res = await fetch("http://localhost:8000/api/users/signup/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) throw new Error("Signup failed");
+
+      const result = await res.json();
+      console.log("User registered:", result);
+      reset();
+    } catch (err) {
+      console.error("Error:", err);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <AuthInputField label="Email" type="email" {...register("email")} />
+      <AuthInputField
+        label="Password"
+        type="password"
+        {...register("password")}
+      />
+      <AuthInputField label="Name" type="text" {...register("name")} />
+      <AuthInputField
+        label="Phone Number"
+        type="tel"
+        {...register("phone_number")}
+      />
+      <AuthInputField
+        label="Birth Date"
+        type="date"
+        {...register("birth_date")}
+      />
+
+      <button
+        type="submit"
+        className="bg-blue-600 text-white px-4 py-2 rounded"
+      >
+        Sign Up
+      </button>
+    </form>
+  );
 }
