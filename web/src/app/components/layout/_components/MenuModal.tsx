@@ -2,7 +2,7 @@
 import { useModalStore } from "@/store/modal-store";
 import Link from "next/link";
 
-export default function MenuModal() {
+export const MenuModal = () => {
   const { isOpen, close } = useModalStore();
 
   if (!isOpen) return null;
@@ -27,4 +27,4 @@ export default function MenuModal() {
       </div>
     </div>
   );
-}
+};

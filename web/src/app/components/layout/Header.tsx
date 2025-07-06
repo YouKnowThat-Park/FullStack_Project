@@ -1,10 +1,10 @@
 "use client";
 import { useModalStore } from "@/store/modal-store";
-import HamburgerIcon from "@/ui/icon/HamburgerIcon";
 import Link from "next/link";
-import MenuModal from "./_components/MenuModal";
+import { HamburgerIcon } from "@/ui/icon/HamburgerIcon";
+import { MenuModal } from "./_components/MenuModal";
 
-export default function Header() {
+export const Header = () => {
   const { isOpen, open } = useModalStore();
 
   return (
@@ -23,4 +23,4 @@ export default function Header() {
       {isOpen && <MenuModal />}
     </header>
   );
-}
+};

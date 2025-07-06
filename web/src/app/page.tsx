@@ -1,4 +1,4 @@
-import HomeUi from "./home/HomeUi";
+import { HomeUi } from "./home/HomeUi";
 
 export default function Home() {
   return (
