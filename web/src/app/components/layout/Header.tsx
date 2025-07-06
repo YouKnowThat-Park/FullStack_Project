@@ -8,7 +8,7 @@ export const Header = () => {
   const { isOpen, open } = useModalStore();
 
   return (
-    <header className="w-full h-16 bg-[#efefef] rounded-lg mt-10">
+    <header className="w-full h-16 bg-[#efefef] rounded-lg mt-10 mb-5">
       <div className="flex flex-row items-center gap-4">
         <Link href="/">Study Project</Link>
 
