@@ -36,31 +36,36 @@ export default function page() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <AuthInputField label="Email" type="email" {...register("email")} />
-      <AuthInputField
-        label="Password"
-        type="password"
-        {...register("password")}
-      />
-      <AuthInputField label="Name" type="text" {...register("name")} />
-      <AuthInputField
-        label="Phone Number"
-        type="tel"
-        {...register("phone_number")}
-      />
-      <AuthInputField
-        label="Birth Date"
-        type="date"
-        {...register("birth_date")}
-      />
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="bg-gray-300 w-full h-[600px] flex justify-center items-center"
+    >
+      <div className="flex flex-col w-[250px] gap-4 border p-4 bg-white">
+        <AuthInputField label="Email" type="email" {...register("email")} />
+        <AuthInputField
+          label="Password"
+          type="password"
+          {...register("password")}
+        />
+        <AuthInputField label="Name" type="text" {...register("name")} />
+        <AuthInputField
+          label="Phone Number"
+          type="tel"
+          {...register("phone_number")}
+        />
+        <AuthInputField
+          label="Birth Day"
+          type="date"
+          {...register("birth_date")}
+        />
 
-      <button
-        type="submit"
-        className="bg-blue-600 text-white px-4 py-2 rounded"
-      >
-        Sign Up
-      </button>
+        <button
+          type="submit"
+          className="bg-blue-600 text-white px-4 py-2 rounded"
+        >
+          Sign Up
+        </button>
+      </div>
     </form>
   );
 }
