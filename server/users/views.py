@@ -1,6 +1,8 @@
 from rest_framework import generics, permissions
 from django.contrib.auth import get_user_model
-from .serializers import RegisterSerializer, UserSerializer
+from .serializers import RegisterSerializer
+from .serializers import EmailTokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 #Django에서 기본 User 모델을 가져옴
 User = get_user_model()
@@ -29,3 +31,7 @@ class UserDetailView(generics.RetrieveAPIView):
         return self.request.user
     # → URL에 user_id를 입력하지 않아도 본인 정보만 조회 가능하게 만듬
     
+
+
+class EmailTokenObtainPairView(TokenObtainPairView):
+    serializer_class = EmailTokenObtainPairSerializer
