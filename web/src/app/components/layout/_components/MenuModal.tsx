@@ -1,6 +1,7 @@
 "use client";
 import { useModalStore } from "@/store/modal-store";
 import Link from "next/link";
+import { ModalLink } from "./LinkWrapper";
 
 export const MenuModal = () => {
   const { isOpen, close } = useModalStore();
@@ -20,8 +21,8 @@ export const MenuModal = () => {
         <div className="border">
           <h2 className="font-semibold text-lg">회원 정보</h2>
           <div className="flex flex-col gap-1">
-            <Link href="/sign-up">회원 가입</Link>
-            <Link href="/sign-in">로그인</Link>
+            <ModalLink href="/sign-up">회원 가입</ModalLink>
+            <ModalLink href="/sign-in">로그인</ModalLink>
           </div>
         </div>
       </div>
