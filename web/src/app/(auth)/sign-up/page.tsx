@@ -2,8 +2,8 @@
 import React from "react";
 import { AuthInputField } from "../_components/AuthInputField";
 import { useForm } from "react-hook-form";
-import { SignUpSchema } from "../schemas/Sign-up_schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { SignUpSchema } from "../schemas/Sign-up_Schema";
 
 interface SignupFormValues {
   name: string;
