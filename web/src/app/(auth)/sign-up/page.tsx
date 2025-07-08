@@ -51,6 +51,11 @@ export default function page() {
           type="password"
           {...register("password")}
         />
+        <AuthInputField
+          label="Confirm Password"
+          type="password"
+          {...register("confirmPassword")}
+        />
         <AuthInputField label="Name" type="text" {...register("name")} />
         <AuthInputField
           label="Phone Number"
