@@ -31,8 +31,6 @@ export default function page() {
 
       if (!res.ok) throw new Error("Signup failed");
 
-      const result = await res.json();
-      console.log("User registered:", result);
       reset();
     } catch (err) {
       console.error("Error:", err);

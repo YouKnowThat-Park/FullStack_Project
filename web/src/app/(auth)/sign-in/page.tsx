@@ -28,10 +28,6 @@ export default function Page() {
         throw new Error("로그인 실패");
       }
 
-      const tokens = await res.json();
-      console.log("Access Token:", tokens.access);
-      console.log("Refresh Token:", tokens.refresh);
-
       // TODO: HttpOnly 쿠키나 secure storage 등에 토큰 저장
       router.push("/");
     } catch (error) {
