@@ -20,6 +20,7 @@ export default function Page() {
           email: data.email,
           password: data.password,
         }),
+        credentials: "include",
       });
 
       if (!res.ok) {
@@ -28,7 +29,6 @@ export default function Page() {
         throw new Error("로그인 실패");
       }
 
-      // TODO: HttpOnly 쿠키나 secure storage 등에 토큰 저장
       router.push("/");
     } catch (error) {
       console.error("Error:", error);

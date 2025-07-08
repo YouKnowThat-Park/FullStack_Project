@@ -134,8 +134,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # 커스텀 유저 모델 지정
 AUTH_USER_MODEL = 'users.User'
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000"
 ]

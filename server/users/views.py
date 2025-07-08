@@ -3,6 +3,10 @@ from django.contrib.auth import get_user_model
 from .serializers import RegisterSerializer
 from .serializers import EmailTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+from .serializers import EmailTokenObtainPairSerializer
+from rest_framework.response import Response
+from rest_framework import status
+from typing import cast, Dict
 
 #Django에서 기본 User 모델을 가져옴
 User = get_user_model()
@@ -33,5 +37,35 @@ class UserDetailView(generics.RetrieveAPIView):
     
 
 
+
 class EmailTokenObtainPairView(TokenObtainPairView):
     serializer_class = EmailTokenObtainPairSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        validated_data = serializer.validated_data
+        access = validated_data["access"]
+        refresh = validated_data["refresh"]
+
+        res = Response({"message": "로그인 성공"}, status=status.HTTP_200_OK)
+
+        res.set_cookie(
+            key='access_token',
+            value=access,
+            httponly=True,
+            secure=True,
+            samesite='Strict',
+            path='/',
+        )
+        res.set_cookie(
+            key='refresh_token',
+            value=refresh,
+            httponly=True,
+            secure=True,
+            samesite='Strict',
+            path='/',
+        )
+
+        return res
