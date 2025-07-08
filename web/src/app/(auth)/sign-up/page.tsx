@@ -1,7 +1,9 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React from "react";
 import { AuthInputField } from "../_components/AuthInputField";
 import { useForm } from "react-hook-form";
+import { SignUpSchema } from "../schemas/Sign-up_schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface SignupFormValues {
   name: string;
@@ -13,7 +15,9 @@ interface SignupFormValues {
 }
 
 export default function page() {
-  const { register, handleSubmit, reset } = useForm<SignupFormValues>();
+  const { register, handleSubmit, reset } = useForm<SignupFormValues>({
+    resolver: zodResolver(SignUpSchema),
+  });
 
   const onSubmit = async (data: SignupFormValues) => {
     try {
