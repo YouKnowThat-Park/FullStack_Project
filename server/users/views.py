@@ -37,20 +37,26 @@ class UserDetailView(generics.RetrieveAPIView):
     
 
 
-
+# JWT 로그인 시 이메일 기반 인증 수행하고 access, refresh token을 HttpOnly 쿠키에 저장해주는 뷰
 class EmailTokenObtainPairView(TokenObtainPairView):
+
+    # 이메일 인증용 시리얼라이저 지정
     serializer_class = EmailTokenObtainPairSerializer
 
+    # 로그인 POST 요청 시 실해오디는 메서드
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
+        # 시리얼라이저에서 발급된 access, refresh 토큰 추출
         validated_data = serializer.validated_data
         access = validated_data["access"]
         refresh = validated_data["refresh"]
 
+        # 기본 응답 구조, 바디에 메시지만 전달
         res = Response({"message": "로그인 성공"}, status=status.HTTP_200_OK)
 
+        # access_token을 HttpOnly 쿠키로 저장
         res.set_cookie(
             key='access_token',
             value=access,
@@ -67,5 +73,7 @@ class EmailTokenObtainPairView(TokenObtainPairView):
             samesite='Strict',
             path='/',
         )
+
+        # httponly: JS에서 접근 불가, secure: https 환경에서만 전송, samesite: 교차 사이트 요청 차단, path: 어떤 경로에서 처리 할건지 "/" 는 전체 경로에서 유효
 
         return res

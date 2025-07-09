@@ -34,28 +34,37 @@ class UserSerializer(serializers.ModelSerializer):
 # Meta는 시리얼라이저의 내부 설정을 한 곳에서 지정하는 설정창? 같은 기능...?
 # Meta를 쓰지 않을 경우 email = serializers.EmailField() password = serializers.CharField(write_only) 이런식으로 하드코딩 해야 됨
 
+
+# username을 email로 바꿔서 JWT 인증을 처리하는 커스텀 시리얼라이저
 class EmailTokenObtainPairSerializer(TokenObtainPairSerializer):
+
+    # username_field를 username대신 email로 변경
     username_field = 'email'
 
+    # 사용자 인증 및 토큰 생성
     def validate(self, attrs):
         email = attrs.get("email")
         password = attrs.get("password")
 
+        # 누락 된 경우 예외 발생
         if not email or not password:
             raise serializers.ValidationError("이메일과 비밀번호는 필수입니다.")
 
+        # Django 내장 인증 함수 사용 (백엔드에서 EmailBackend가 username=email로 처리)
         user = authenticate(request=self.context.get("request"), username=email, password=password)
 
         if not user:
             raise serializers.ValidationError("이메일 또는 비밀번호가 올바르지 않습니다.")
 
-        refresh: RefreshToken = self.get_token(user)  # ✅ 타입 명시
+        refresh: RefreshToken = self.get_token(user)
 
+        # 문자열 형태로 바꿔서 프론트엔드에서 쿠키 저장하거나 처리
         return {
             "refresh": str(refresh),
             "access": str(refresh.access_token),
         }
 
+      # 클라이언트에서 전달받은 JSON 데이터를 내부에서 사용할 수 있게 dict로 정리
     def to_internal_value(self, data):
         return {
             'email': data.get('email', ''),
