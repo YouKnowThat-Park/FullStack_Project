@@ -23,6 +23,7 @@ export const MenuModal = () => {
           <div className="flex flex-col gap-1">
             <ModalLink href="/sign-up">회원 가입</ModalLink>
             <ModalLink href="/sign-in">로그인</ModalLink>
+            <ModalLink href="/mypage">마이페이지</ModalLink>
             <button onClick={() => handleLogout()}>로그 아웃</button>
           </div>
         </div>
