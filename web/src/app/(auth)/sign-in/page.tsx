@@ -13,7 +13,7 @@ export default function Page() {
 
   const onSubmit = async (data: { email: string; password: string }) => {
     try {
-      const res = await fetch("http://localhost:8000/api/token/", {
+      const res = await fetch("api/sign-in", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -24,8 +24,6 @@ export default function Page() {
       });
 
       if (!res.ok) {
-        const errPayload = await res.json();
-        console.error("로그인 에러 페이로드:", errPayload);
         throw new Error("로그인 실패");
       }
 
