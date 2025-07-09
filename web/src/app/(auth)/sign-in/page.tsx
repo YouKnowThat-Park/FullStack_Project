@@ -6,11 +6,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 
 export default function Page() {
+  // React Hook Form 사용
   const { register, handleSubmit } = useForm<SignInFormValues>({
     resolver: zodResolver(SignInSchema),
   });
   const router = useRouter();
 
+  // 보안상 이유로 login api를 api route사용
   const onSubmit = async (data: { email: string; password: string }) => {
     try {
       const res = await fetch("api/sign-in", {

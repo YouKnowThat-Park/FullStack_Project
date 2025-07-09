@@ -15,10 +15,13 @@ interface SignupFormValues {
 }
 
 export default function page() {
+  // React Hook Form 사용
   const { register, handleSubmit, reset } = useForm<SignupFormValues>({
     resolver: zodResolver(SignUpSchema),
   });
 
+  // 회원가입은 서버사이드 인증이나 쿠키 처리가 필요 없기 때문에 API Route 사용 X
+  // 보안이 중요한 경우는 로그인 같은 경우는 API Route 사용
   const onSubmit = async (data: SignupFormValues) => {
     try {
       const res = await fetch("http://localhost:8000/api/users/signup/", {
