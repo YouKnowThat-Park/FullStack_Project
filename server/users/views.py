@@ -6,7 +6,6 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializers import EmailTokenObtainPairSerializer
 from rest_framework.response import Response
 from rest_framework import status
-from typing import cast, Dict
 
 #Django에서 기본 User 모델을 가져옴
 User = get_user_model()
@@ -77,3 +76,47 @@ class EmailTokenObtainPairView(TokenObtainPairView):
         # httponly: JS에서 접근 불가, secure: https 환경에서만 전송, samesite: 교차 사이트 요청 차단, path: 어떤 경로에서 처리 할건지 "/" 는 전체 경로에서 유효
 
         return res
+    
+
+
+class UserUpdateView(generics.UpdateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = User.objects.all()
+
+    def get_object(self):
+        return self.request.user
+
+    def patch(self, request, *args, **kwargs):
+        user = self.get_object()
+        data = request.data
+
+        name = data.get("name")
+        old_password = data.get("old_password")
+        new_password = data.get("new_password")
+
+        if name:
+            user.name = name
+
+        if old_password or new_password:
+            if not old_password or not new_password:
+                return Response(
+                    {"error": "기존 비밀번호와 새 비밀번호를 모두 입력해주세요."},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            if not user.check_password(old_password):
+                return Response(
+                    {"error": "기존 비밀번호가 올바르지 않습니다."},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            if len(new_password) < 8:
+                return Response(
+                    {"error": "새 비밀번호는 최소 8자리 이상이어야 합니다."},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            user.set_password(new_password)
+
+        user.save()
+        return Response({"message": "사용자 정보가 성공적으로 수정되었습니다."})
