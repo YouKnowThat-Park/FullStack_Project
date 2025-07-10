@@ -15,7 +15,7 @@ export default function Page() {
   // 보안상 이유로 login api를 api route사용
   const onSubmit = async (data: { email: string; password: string }) => {
     try {
-      const res = await fetch("api/sign-in", {
+      const res = await fetch("http://localhost:8000/api/token/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -1,8 +1,6 @@
-import { cookies } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
-  // 프론트에서 넘어온 요청을 body 파싱
   const body = await req.json();
 
   const backendRes = await fetch("http://localhost:8000/api/token/", {
@@ -14,31 +12,38 @@ export async function POST(req: NextRequest) {
   const data = await backendRes.json();
 
   if (!backendRes.ok) {
-    return NextResponse.json(data, { status: backendRes.status });
+    return new Response(JSON.stringify(data), {
+      status: backendRes.status,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
-  // 로그인 성공시 access, refresh 토큰 추출
   const accessToken = data.access;
   const refreshToken = data.refresh_token;
-  const response = NextResponse.json({ message: "login successful" });
 
-  // 서버에서 쿠키스토어 접근
-  const cookieStore = cookies();
+  if (!accessToken || !refreshToken) {
+    return new Response(
+      JSON.stringify({ error: "토큰이 응답에 없습니다", data }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+  }
 
-  // httpOnly, secure, sameSite = strict 옵션으로 쿠키 설정
-  cookieStore.set("access_token", accessToken, {
-    httpOnly: true,
-    secure: true,
-    sameSite: "strict",
-    path: "/",
-  });
-
-  cookieStore.set("refresh_token", refreshToken, {
-    httpOnly: true,
-    secure: true,
-    sameSite: "strict",
-    path: "/",
-  });
+  const response = new Response(
+    JSON.stringify({ message: "login successful" }),
+    {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+        "Set-Cookie": [
+          `access_token=${accessToken}; HttpOnly; Path=/; Max-Age=3600; SameSite=Strict; Secure`,
+          `refresh_token=${refreshToken}; HttpOnly; Path=/; Max-Age=604800; SameSite=Strict; Secure`,
+        ].join(", "),
+      },
+    }
+  );
 
   return response;
 }
