@@ -21,7 +21,8 @@
 
 ---
 ## 👤 Auth
-Django + DRF + SimpleJWT를 사용해 회원가입 및 로그인 시스템 구축.
+```md
+Django + DRF + SimpleJWT를 사용해 회원가입 및 로그인, 사용자 정보 시스템 구축.
 - AbstractBaseUser, PermmissionsMixin을 사용하여 유저, 권한 필드 정의
 - User Manager에서 일반 사용자(user) / 관리자(staff, superuser) 계정 생성 로직 분리 
 - normalize_"?"  유틸 함수를 만들어 서버 측 입력값도 정규화
@@ -29,5 +30,13 @@ Django + DRF + SimpleJWT를 사용해 회원가입 및 로그인 시스템 구�
 - EmailTokenObtainPairSerializer에서 username > email 필드 교체
 - EmailTokenObtainPairView에서 로그인 요청 시 JWT 발급 후 HttpOnly 쿠키에 access, refresh 저장
 - RegisterView(회원가입), UserDetailView(사용자 정보) API 구성
+```
+```md
+Next.js + TypeScript + RHF + Zod를 사용해 회원가입 및 로그인 시스템 구축.                     
+- React Hook Form + Zod를 사용해 클라이언트에서 입력값 검증 및 에러 메시지 처리
+- <AuthInputField /> 컴포넌트로 공통 AuthInput 재사용하기 위해 forwarRef 사용해서 넘김
+- JWT access, refresh 쿠니는 Django에서 HttpOnly 쿠키로 저장
+```
+```md
 
-Next.js + TypeScript + RHF + Zod를 사용해 회원가입 및 로그인 시스템 구축.
+```
