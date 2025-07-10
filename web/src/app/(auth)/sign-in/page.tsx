@@ -12,7 +12,6 @@ export default function Page() {
   });
   const router = useRouter();
 
-  // 보안상 이유로 login api를 api route사용
   const onSubmit = async (data: { email: string; password: string }) => {
     try {
       const res = await fetch("http://localhost:8000/api/token/", {
