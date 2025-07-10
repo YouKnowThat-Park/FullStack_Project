@@ -8,5 +8,5 @@ export async function getUser() {
     throw new Error("유저 정보를 불러오지 못했습니다.");
   }
 
-  return res.json;
+  return res.json();
 }
