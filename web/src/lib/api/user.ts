@@ -1,5 +1,5 @@
 export async function getUser() {
-  const res = await fetch("/api/user", {
+  const res = await fetch("/api/user/get-user-info", {
     method: "Get",
     credentials: "include",
   });
