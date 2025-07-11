@@ -38,5 +38,10 @@ Next.js + TypeScript + RHF + Zod를 사용해 회원가입 및 로그인 시스�
 - JWT access, refresh 쿠니는 Django에서 HttpOnly 쿠키로 저장
 ```
 ```md
-
+Tanstack Query의 Mutation을 사용하여 사용자 정보 수정
+- <AuthInputField /> 컴포넌트로 공통 AuthInput 재사용
+- name, password 변경 가능
+```
+## 💂🏻 Admin
+```md
 ```
