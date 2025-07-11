@@ -53,23 +53,27 @@ class EmailTokenObtainPairView(TokenObtainPairView):
         refresh = validated_data["refresh"]
 
         # 기본 응답 구조, 바디에 메시지만 전달
-        res = Response({"message": "로그인 성공"}, status=status.HTTP_200_OK)
-
+        res = Response({
+            "message": "로그인 성공",
+            "access": access,
+            "refresh": refresh
+        }, status=status.HTTP_200_OK)
+        
         # access_token을 HttpOnly 쿠키로 저장
         res.set_cookie(
             key='access_token',
             value=access,
             httponly=True,
-            secure=True,
-            samesite='Strict',
+            secure=False,
+            samesite='Lax',
             path='/',
         )
         res.set_cookie(
             key='refresh_token',
             value=refresh,
             httponly=True,
-            secure=True,
-            samesite='Strict',
+            secure=False,
+            samesite='Lax',
             path='/',
         )
 
