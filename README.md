@@ -17,7 +17,7 @@
 ![Django](https://img.shields.io/badge/Django-4.x-092E20?logo=django&logoColor=white)
 
 ### DB
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?logo=postgresql&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
 
 ---
 ## 👤 Auth
