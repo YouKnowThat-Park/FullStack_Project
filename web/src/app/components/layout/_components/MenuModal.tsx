@@ -27,6 +27,12 @@ export const MenuModal = () => {
             <button onClick={() => handleLogout()}>로그 아웃</button>
           </div>
         </div>
+        <div className="border">
+          <h2 className="font-semibold text-lg">관리자 페이지</h2>
+          <div className="flex flex-col gap-1">
+            <ModalLink href="/admin">관리자</ModalLink>
+          </div>
+        </div>
       </div>
     </div>
   );
