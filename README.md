@@ -20,6 +20,11 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
 
 ---
+## ⚠️ Security & Access
+```md
+- Middleware 사용하여 로그인 상태에서 Sign-in, Sign-up 페이지 접근 제한, 또한 Mypage는 로그인 정보가 있을 경우 이동 가능
+-
+```
 ## 👤 Auth
 ```md
 Django + DRF + SimpleJWT를 사용해 회원가입 및 로그인, 사용자 정보 시스템 구축.
