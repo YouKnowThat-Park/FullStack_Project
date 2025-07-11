@@ -11,7 +11,7 @@
 ![React Hook Form](https://img.shields.io/badge/React_Hook_Form-7.60.0-EC5990?logo=reacthookform&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.1-06B6D4?logo=tailwindcss&logoColor=white)
 ![ESLint](https://img.shields.io/badge/ESLint-8-purple?logo=eslint&logoColor=white)
-![PostCSS](https://img.shields.io/badge/PostCSS-8-DD3A0A?logo=postcss&logoColor=white)
+
 ### Back-End
 ![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)
 ![Django](https://img.shields.io/badge/Django-4.x-092E20?logo=django&logoColor=white)
