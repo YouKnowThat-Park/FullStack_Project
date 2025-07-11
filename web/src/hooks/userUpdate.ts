@@ -1,10 +1,5 @@
+import { UpdateUser } from "@/type/UpdateUser";
 import { useMutation } from "@tanstack/react-query";
-
-interface UpdateUser {
-  name?: string;
-  old_password?: string;
-  new_password?: string;
-}
 
 export const useUpdate = () => {
   return useMutation({
