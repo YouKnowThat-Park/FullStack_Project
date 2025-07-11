@@ -1,49 +1,58 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-  const body = await req.json();
+  try {
+    const body = await req.json();
 
-  const backendRes = await fetch("http://localhost:8000/api/token/", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
-
-  const data = await backendRes.json();
-
-  if (!backendRes.ok) {
-    return new Response(JSON.stringify(data), {
-      status: backendRes.status,
-      headers: { "Content-Type": "application/json" },
-    });
-  }
-
-  const accessToken = data.access;
-  const refreshToken = data.refresh_token;
-
-  if (!accessToken || !refreshToken) {
-    return new Response(
-      JSON.stringify({ error: "토큰이 응답에 없습니다", data }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-  }
-
-  const response = new Response(
-    JSON.stringify({ message: "login successful" }),
-    {
-      status: 200,
+    const backendRes = await fetch("http://localhost:8000/api/token/", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Set-Cookie": [
-          `access_token=${accessToken}; HttpOnly; Path=/; Max-Age=3600; SameSite=Strict; Secure`,
-          `refresh_token=${refreshToken}; HttpOnly; Path=/; Max-Age=604800; SameSite=Strict; Secure`,
-        ].join(", "),
+        Accept: "application/json",
+        "User-Agent": "Mozilla/5.0",
       },
-    }
-  );
+      body: JSON.stringify(body),
+    });
 
-  return response;
+    // ✅ 여기에 추가
+    const raw = await backendRes.text();
+    console.log("[백엔드 응답 텍스트]", raw);
+
+    // JSON으로 다시 파싱 시도 (실패할 수 있음!)
+    const data = JSON.parse(raw);
+
+    const accessToken = data.access;
+    const refreshToken = data.refresh;
+
+    if (!accessToken || !refreshToken) {
+      console.error("[토큰 없음]", data);
+      return NextResponse.json(
+        { error: "토큰이 응답에 없습니다", data },
+        { status: 500 }
+      );
+    }
+
+    const response = NextResponse.json({ message: "login successful" });
+
+    response.cookies.set("access_token", accessToken, {
+      httpOnly: true,
+      path: "/",
+      maxAge: 60 * 60,
+      sameSite: "lax",
+      secure: false,
+    });
+
+    response.cookies.set("refresh_token", refreshToken, {
+      httpOnly: true,
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7,
+      sameSite: "lax",
+      secure: false,
+    });
+
+    return response;
+  } catch (error) {
+    console.error("[SIGN-IN ROUTE ERROR]", error);
+    return new Response("서버 내부 에러 발생", { status: 500 });
+  }
 }
