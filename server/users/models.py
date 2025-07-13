@@ -6,6 +6,7 @@ from users.utils.normalize import (
     normalize_phone_number,
     normalize_name,
 )
+from django.utils import timezone
 
 # 2. User의 설정 (생성/권한)
 class UserManager(BaseUserManager):
@@ -74,6 +75,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(default=True)
     #is_superuser는 전체 권한 여부를 갖고 있는 총 관리자
 
+    # 스태프 권한
+    is_suspended = models.BooleanField(default=False)
+    suspended_until = models.DateTimeField(null=True, blank=True)
+
     objects = UserManager()
 
     # AbstractBaseUser에서 요구되는 필수 설정
@@ -84,3 +89,11 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
+    # 사용자가 정지 상태인지 확인하는 코드
+    def is_currently_suspended(self) -> bool:  # pyright: ignore[reportReturnType]
+     return bool(
+        self.is_suspended and
+        self.suspended_until and
+        timezone.now() < self.suspended_until
+    )
