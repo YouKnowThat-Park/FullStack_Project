@@ -37,7 +37,8 @@ Django + DRF + SimpleJWT를 사용해 회원가입 및 로그인, 사용자 정�
 - RegisterView(회원가입), UserDetailView(사용자 정보) API 구성
 ```
 ```md
-Next.js + TypeScript + RHF + Zod를 사용해 회원가입 및 로그인 시스템 구축.                     
+Next.js + TypeScript + RHF + Zod를 사용해 회원가입 및 로그인 시스템 구축.
+- Sign-up은 클라이언트에서 백엔드 직접 호출, Sign-in은 API Route를 사용해서 보안 강화
 - React Hook Form + Zod를 사용해 클라이언트에서 입력값 검증 및 에러 메시지 처리
 - <AuthInputField /> 컴포넌트로 공통 AuthInput 재사용하기 위해 forwarRef 사용해서 넘김
 - JWT access, refresh 쿠니는 Django에서 HttpOnly 쿠키로 저장
