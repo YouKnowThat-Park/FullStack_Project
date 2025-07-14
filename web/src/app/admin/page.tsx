@@ -1,3 +1,16 @@
+"use client";
+import { useRouter } from "next/navigation";
+
 export default function page() {
-  return <div>관리자 전용 페이지</div>;
+  const route = useRouter();
+
+  return (
+    <div>
+      <h1>admin page</h1>
+      <div>
+        <button onClick={() => route.push("/admin/register")}>상품 관리</button>
+        <button onClick={() => route.push("/admin/user")}>유저 관리</button>
+      </div>
+    </div>
+  );
 }
