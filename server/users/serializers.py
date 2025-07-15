@@ -36,35 +36,64 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 # username을 email로 바꿔서 JWT 인증을 처리하는 커스텀 시리얼라이저
+from rest_framework import serializers
+from django.contrib.auth import get_user_model, authenticate
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+# Django에서 기본 User 모델을 가져옴
+User = get_user_model()
+
+
+# username을 email로 바꿔서 JWT 인증을 처리하는 커스텀 시리얼라이저
 class EmailTokenObtainPairSerializer(TokenObtainPairSerializer):
 
-    # username_field를 username대신 email로 변경
+    # username_field를 username 대신 email로 변경
     username_field = 'email'
+
+    @classmethod
+    def get_token(cls, user):
+        # 기본 토큰 생성
+        token = super().get_token(user)
+
+        # ✅ access token payload에 관리자 여부를 포함시킴
+        token["is_staff"] = user.is_staff
+        token["is_superuser"] = user.is_superuser
+        token["email"] = user.email  # (선택) 프론트에서 사용할 수 있음
+
+        return token
 
     # 사용자 인증 및 토큰 생성
     def validate(self, attrs):
         email = attrs.get("email")
         password = attrs.get("password")
 
-        # 누락 된 경우 예외 발생
+        # 누락된 경우 예외 발생
         if not email or not password:
             raise serializers.ValidationError("이메일과 비밀번호는 필수입니다.")
 
         # Django 내장 인증 함수 사용 (백엔드에서 EmailBackend가 username=email로 처리)
-        user = authenticate(request=self.context.get("request"), username=email, password=password)
+        user = authenticate(
+            request=self.context.get("request"),
+            username=email,
+            password=password
+        )
 
         if not user:
             raise serializers.ValidationError("이메일 또는 비밀번호가 올바르지 않습니다.")
 
-        refresh: RefreshToken = self.get_token(user)
+        # refresh/access 토큰 발급
+        refresh = self.get_token(user)
 
         # 문자열 형태로 바꿔서 프론트엔드에서 쿠키 저장하거나 처리
         return {
             "refresh": str(refresh),
             "access": str(refresh.access_token),
+            "is_staff": user.is_staff,         # 프론트에서 직접 사용 가능 (선택)
+            "is_superuser": user.is_superuser, # 프론트에서 직접 사용 가능 (선택)
         }
 
-      # 클라이언트에서 전달받은 JSON 데이터를 내부에서 사용할 수 있게 dict로 정리
+    # 클라이언트에서 전달받은 JSON 데이터를 내부에서 사용할 수 있게 dict로 정리
     def to_internal_value(self, data):
         return {
             'email': data.get('email', ''),
