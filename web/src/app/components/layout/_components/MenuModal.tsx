@@ -1,7 +1,7 @@
 "use client";
 import { useModalStore } from "@/store/modal-store";
 import { ModalLink } from "./LinkWrapper";
-import { handleLogout } from "@/app/utils/Logout.ts";
+import { handleLogout } from "@/utils/Logout.ts";
 
 export const MenuModal = () => {
   const { isOpen, close } = useModalStore();
