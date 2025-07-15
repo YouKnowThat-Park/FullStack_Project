@@ -6,6 +6,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializers import EmailTokenObtainPairSerializer
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.pagination import PageNumberPagination
 
 #Django에서 기본 User 모델을 가져옴
 User = get_user_model()
@@ -82,11 +83,14 @@ class EmailTokenObtainPairView(TokenObtainPairView):
         return res
     
 
+class UserPagination(PageNumberPagination):
+    page_size = 10
 # 유저 리스트 뷰
 class UserListView(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
     permission_classes = [permissions.IsAdminUser]
+    pagination_class = UserPagination
 
 # 유저 정보 업데이트 뷰
 class UserUpdateView(generics.UpdateAPIView):

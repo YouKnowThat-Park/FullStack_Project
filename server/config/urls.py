@@ -15,5 +15,4 @@ urlpatterns = [
     # → 리프레시 토큰
     path('api/users/', include('users.urls')),
     # → 회원가입
-    path("admin/users/", UserListView.as_view(), name="user-list"),
 ]
