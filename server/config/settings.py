@@ -37,8 +37,10 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'users.authentication.CookieJWTAuthentication',
+    
     ),
+   'PAGE_SIZE': 10,
 }
 
 MIDDLEWARE = [
