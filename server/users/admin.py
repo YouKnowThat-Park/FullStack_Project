@@ -9,7 +9,7 @@ from users.models import User
 class UserAdmin(BaseUserAdmin):
     model = User
     # → 어떤 모델을 관리할지 지정 여기선 User 모델을 관리
-    list_display = ('email', 'name', 'phone_number', 'birth_date', 'is_active', 'is_staff')
+    list_display = ('email', 'name', 'phone_number', 'birth_date', 'is_active', 'is_staff', 'is_suspended', 'suspended_until')
     # → 사용자 정보 리스트? 칼럼 표시
     search_fields = ('email', 'name', 'phone_number')
     # → 관리자 페이지에서 검색 가능한 필드 // 언제까지 하나씩 찾아볼꺼야!?
@@ -20,6 +20,7 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('개인 정보', {'fields': ('name', 'phone_number', 'birth_date')}),
+        ('정지 상태', {'fields': ('is_suspended', 'suspended_until')}), 
         ('권한', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
     )
 
@@ -27,6 +28,6 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'name', 'phone_number', 'birth_date', 'password1', 'password2'),
+            'fields': ('email', 'name', 'phone_number', 'birth_date', 'password1', 'password2', 'is_suspended', 'suspended_until'),
         }),
     )

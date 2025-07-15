@@ -82,7 +82,13 @@ class EmailTokenObtainPairView(TokenObtainPairView):
         return res
     
 
+# 유저 리스트 뷰
+class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = RegisterSerializer
+    permission_classes = [permissions.IsAdminUser]
 
+# 유저 정보 업데이트 뷰
 class UserUpdateView(generics.UpdateAPIView):
     permission_classes = [permissions.IsAuthenticated]
     queryset = User.objects.all()
