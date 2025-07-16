@@ -23,7 +23,7 @@
 ## ⚠️ Security & Access
 ```md
 - Middleware 사용하여 로그인 상태에서 Sign-in, Sign-up 페이지 접근 제한, 또한 Mypage는 로그인 정보가 있을 경우 이동 가능
--
+- JWT Token에서 decodePayloadFromJWT를 사용해 staff권한 확인, 있을경우 Admin 페이지로 이동 
 ```
 ## 👤 Auth
 ```md
