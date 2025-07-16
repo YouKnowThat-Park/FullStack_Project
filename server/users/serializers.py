@@ -15,7 +15,7 @@ User = get_user_model()
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['email', 'password', 'name', 'phone_number', 'birth_date']
+        fields = ['id', 'email', 'password', 'name', 'phone_number', 'birth_date']
         extra_kwargs = {
             'password': {'write_only': True}
         }
@@ -29,7 +29,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'name', 'phone_number', 'birth_date']
+        fields = ['id', 'email', 'name', 'phone_number', 'birth_date', 'is_suspended', 'suspended_until']
 
 # Meta는 시리얼라이저의 내부 설정을 한 곳에서 지정하는 설정창? 같은 기능...?
 # Meta를 쓰지 않을 경우 email = serializers.EmailField() password = serializers.CharField(write_only) 이런식으로 하드코딩 해야 됨
@@ -81,6 +81,9 @@ class EmailTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         if not user:
             raise serializers.ValidationError("이메일 또는 비밀번호가 올바르지 않습니다.")
+        
+        if not user.is_active:
+            raise serializers.ValidationError("정지된 사용자입니다.")
 
         # refresh/access 토큰 발급
         refresh = self.get_token(user)
