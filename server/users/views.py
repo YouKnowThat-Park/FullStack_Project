@@ -1,12 +1,16 @@
 from rest_framework import generics, permissions
 from django.contrib.auth import get_user_model
-from .serializers import RegisterSerializer
+from .serializers import UserSerializer
 from .serializers import EmailTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializers import EmailTokenObtainPairSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAdminUser
+from django.utils import timezone
+from datetime import timedelta
 
 #Django에서 기본 User 모델을 가져옴
 User = get_user_model()
@@ -15,7 +19,7 @@ User = get_user_model()
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     # → Django ORM 문법 파이썬 코드로 SQL을 추상화 한 것 // 쉽게 장고 버전 SQL
-    serializer_class = RegisterSerializer
+    serializer_class = UserSerializer
     # → 어떤 시리얼라이저(문법 변환기)를 사용할지 지정 
     permission_classes = [permissions.AllowAny]
     # → 인증 없이도 접근 가능 (회원정보가 없는 비회원이 가입해야 되니까)
@@ -26,7 +30,7 @@ class RegisterView(generics.CreateAPIView):
 class UserDetailView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     # → Django ORM 문법 파이썬 코드로 SQL을 추상화 한 것 // 쉽게 장고 버전 SQL
-    serializer_class = RegisterSerializer
+    serializer_class = UserSerializer
     # → 어떤 시리얼라이저(문법 변환기)를 사용할지 지정
     permission_classes = [permissions.IsAuthenticated]
     # → 로그인된 사용자만 조회 가능하게 설정
@@ -87,8 +91,8 @@ class UserPagination(PageNumberPagination):
     page_size = 10
 # 유저 리스트 뷰
 class UserListView(generics.ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = RegisterSerializer
+    queryset = User.objects.order_by('-id')
+    serializer_class = UserSerializer
     permission_classes = [permissions.IsAdminUser]
     pagination_class = UserPagination
 
@@ -134,3 +138,39 @@ class UserUpdateView(generics.UpdateAPIView):
 
         user.save()
         return Response({"message": "사용자 정보가 성공적으로 수정되었습니다."})
+    
+class ToggleUserSuspensionView(APIView):
+    permission_classes = [IsAdminUser]
+
+    def post(self, request, user_id):
+        try:
+            user = User.objects.get(id=user_id)
+        except User.DoesNotExist:
+            return Response({"error": "유저 없음"}, status=status.HTTP_404_NOT_FOUND)
+        
+        suspend = request.data.get("suspend", False)
+        suspend_days = request.data.get("suspend_days")
+        
+        if suspend:
+            if not suspend_days:
+                return Response({"error": "정지 기간이 필요합니다."})
+            
+            try:
+                days = int(suspend_days)
+            except ValueError:
+                return Response({"error": "suspend_days는 숫자여야 합니다."})
+            
+            user.is_suspended = True
+            user.suspended_until = timezone.now() + timedelta(days=days)
+        else:
+            user.is_suspended = False
+            user.suspended_until = None
+
+        user.save()
+
+        return Response({
+            "message": "유저 상태 변경완료",
+            "is_suspended": user.is_suspended,
+            "suspended_until": user.suspended_until
+
+        })
