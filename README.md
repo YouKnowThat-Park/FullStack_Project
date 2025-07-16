@@ -54,4 +54,9 @@ Tanstack Query의 Mutation을 사용하여 사용자 정보 수정
 - 로그인시 관리자(staff, superuser)권한을 JWT Token에 넣고 관리자 페이지에서 권한 확인
 - PageNumberPagination을 적용하여 페이지당 10명의 데이터만 반환
 - 클라이언트에서는 Tanstack Query를 사용해 서버로부터 유저 리스트를 페이지 단위로 요청
+- 관리자 전용 페이지에서 사용자 정지/해제 기능 추가
+  - suspend, suspend_days 파라미터를 받아 정지 설정 또는 해제 처리
+  - 정지 시 suspended_until 계산, 해제 시 관련 필드 초기화
+  - 1, 3, 7, 30일 정지 버튼 및 해제 버튼 제공
+  - 정지 기간 후 자동 refetch처리 
 ```
