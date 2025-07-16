@@ -50,4 +50,8 @@ Tanstack Query의 Mutation을 사용하여 사용자 정보 수정
 ```
 ## 💂🏻 Admin
 ```md
+프론트엔드 관리자 페이지 구축.
+- 로그인시 관리자(staff, superuser)권한을 JWT Token에 넣고 관리자 페이지에서 권한 확인
+- PageNumberPagination을 적용하여 페이지당 10명의 데이터만 반환
+- 클라이언트에서는 Tanstack Query를 사용해 서버로부터 유저 리스트를 페이지 단위로 요청
 ```
