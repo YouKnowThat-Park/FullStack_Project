@@ -2,19 +2,19 @@
 ## ✍️ Tech Stack
 
 ### Front-End  
-![Next.js](https://img.shields.io/badge/Next.js-14.2.20-black?logo=nextdotjs&logoColor=white)
-![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript&logoColor=white)
-![Zustand](https://img.shields.io/badge/Zustand-5.0.6-000?logo=Zustand&logoColor=white)
-![Zod](https://img.shields.io/badge/Zod-3.25.74-informational?logo=zod&logoColor=white)
-![React Query](https://img.shields.io/badge/TanStack_React_Query-5.82.0-ff4154?logo=react-query&logoColor=white)
-![React Hook Form](https://img.shields.io/badge/React_Hook_Form-7.60.0-EC5990?logo=reacthookform&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.1-06B6D4?logo=tailwindcss&logoColor=white)
-![ESLint](https://img.shields.io/badge/ESLint-8-purple?logo=eslint&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-black?logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-blue?logo=typescript&logoColor=white)
+![Zustand](https://img.shields.io/badge/Zustand-000?logo=Zustand&logoColor=white)
+![Zod](https://img.shields.io/badge/Zod-informational?logo=zod&logoColor=white)
+![React Query](https://img.shields.io/badge/TanStack_React_Query-ff4154?logo=react-query&logoColor=white)
+![React Hook Form](https://img.shields.io/badge/React_Hook_Form-EC5990?logo=reacthookform&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white)
+![ESLint](https://img.shields.io/badge/ESLint-purple?logo=eslint&logoColor=white)
 
 ### Back-End
-![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)
-![Django](https://img.shields.io/badge/Django-4.x-092E20?logo=django&logoColor=white)
+![Python](https://img.shields.io/badge/Pytho-3776AB?logo=python&logoColor=white)
+![Django](https://img.shields.io/badge/Django-092E20?logo=django&logoColor=white)
 
 ### DB
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
