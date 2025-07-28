@@ -28,3 +28,11 @@ class ProductSerializer(serializers.ModelSerializer):
             'is_active', 'created_at', 'updated_at', 'admin_user', 'images'
         ]
         read_only_fields = ['id', 'created_at', 'updated_at', 'sold_count']
+
+class PublicProductSerializer(serializers.ModelSerializer):
+    category = CategorySerializer(read_only=True)
+    images = ProductImageSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Product
+        exclude = ['admin_user'] 

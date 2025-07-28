@@ -1,8 +1,8 @@
 from rest_framework import generics, permissions
 from .models import Product, ProductImage, Category
-from .serializers import ProductSerializer, ProductImageSerializer, CategorySerializer
+from .serializers import ProductSerializer, ProductImageSerializer, CategorySerializer, PublicProductSerializer
 
-# 상품 목록 + 등록
+# 관리자 전용 상품 목록(GET) + 등록(POST)
 class ProductListCreateView(generics.ListCreateAPIView):
     queryset = Product.objects.all().order_by('-created_at')
     serializer_class = ProductSerializer
@@ -10,6 +10,12 @@ class ProductListCreateView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(admin_user=self.request.user)
+
+# 일반 사용자 전용 상품 목록(GET)
+class PublicProductListView(generics.ListAPIView):
+    queryset = Product.objects.filter(is_active=True).order_by('-created_at')
+    serializer_class = PublicProductSerializer
+    permission_classes = [permissions.AllowAny] 
 
 # 상품 수정
 class ProductRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):

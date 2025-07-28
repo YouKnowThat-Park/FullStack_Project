@@ -15,4 +15,6 @@ urlpatterns = [
     # → 리프레시 토큰
     path('api/users/', include('users.urls')),
     # → 회원가입
+    path('api/products/', include('products.urls'))
+    # → 상품 관련 url
 ]
