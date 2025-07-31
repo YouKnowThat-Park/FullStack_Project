@@ -33,6 +33,12 @@ export const MenuModal = () => {
             <ModalLink href="/admin">관리자</ModalLink>
           </div>
         </div>
+        <div className="border">
+          <h2 className="font-semibold text-lg">사용자 전용</h2>
+          <div className="flex flex-col gap-1">
+            <ModalLink href="/products">상점</ModalLink>
+          </div>
+        </div>
       </div>
     </div>
   );
