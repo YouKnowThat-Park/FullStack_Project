@@ -1,6 +1,6 @@
 "use client";
-import { usePublicProductList } from "@/hooks/useProductList";
-import { Product } from "@/type/Product";
+import { usePublicProductList } from "@/hooks/usePublicProductList";
+import { PublicProduct } from "@/type/Product";
 import Image from "next/image";
 
 export default function ProductsPage() {
@@ -8,7 +8,7 @@ export default function ProductsPage() {
 
   return (
     <div>
-      {data?.map((product: Product) => (
+      {data?.map((product: PublicProduct) => (
         <div key={product.name}>
           <p>{product.name}</p>
           <p>{product.price}</p>
