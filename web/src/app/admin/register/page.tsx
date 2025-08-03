@@ -1,9 +1,5 @@
 "use client";
 
-export default function page() {
-  return (
-    <div>
-      <div></div>
-    </div>
-  );
+export default function AdminProductsPage() {
+  return <div></div>;
 }
