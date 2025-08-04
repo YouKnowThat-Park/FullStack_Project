@@ -1,3 +1,5 @@
+import { Category } from "./Category";
+
 export interface ProductImage {
   image: string;
 }
@@ -17,7 +19,7 @@ export interface AdminProduct {
   stock: number;
   sold_count: number;
   rating: number;
-  category: string;
+  category: Category | null;
   is_active: boolean;
   created_at: string;
   updated_at: string;
