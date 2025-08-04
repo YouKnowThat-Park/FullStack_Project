@@ -25,3 +25,15 @@ export interface AdminProduct {
   updated_at: string;
   admin_user: string;
 }
+
+export interface CreateProductInput {
+  name: string;
+  description: string;
+  price: number;
+  discount_price: number;
+  stock: number;
+  category: number;
+  category_id: number;
+  is_active: boolean;
+  image?: File;
+}

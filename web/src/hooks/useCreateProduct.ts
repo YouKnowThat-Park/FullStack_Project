@@ -1,5 +1,5 @@
 import { createProduct } from "@/lib/api/products.admin";
-import { AdminProduct } from "@/type/Product";
+import { CreateProductInput } from "@/type/Product";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const useCreateProduct = () => {
@@ -8,7 +8,7 @@ export const useCreateProduct = () => {
   return useMutation({
     mutationFn: (
       product: Omit<
-        AdminProduct,
+        CreateProductInput,
         "sold_count" | "created_at" | "rating" | "updated_at" | "admin_user"
       >
     ) => createProduct(product),

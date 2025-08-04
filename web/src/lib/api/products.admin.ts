@@ -1,4 +1,4 @@
-import { AdminProduct } from "@/type/Product";
+import { AdminProduct, CreateProductInput } from "@/type/Product";
 
 export const fetchAdminProduct = async (): Promise<AdminProduct[]> => {
   const res = await fetch("http://localhost:8000/api/products/admin/", {
@@ -10,7 +10,7 @@ export const fetchAdminProduct = async (): Promise<AdminProduct[]> => {
 
 export const createProduct = async (
   product: Omit<
-    AdminProduct,
+    CreateProductInput,
     "sold_count" | "created_at" | "rating" | "updated_at" | "admin_user"
   >
 ) => {
