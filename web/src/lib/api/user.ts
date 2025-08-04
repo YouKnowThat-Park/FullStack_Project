@@ -1,5 +1,5 @@
 export async function getUser() {
-  const res = await fetch("/api/user/get-info", {
+  const res = await fetch("http://localhost:8000/api/users/profile/", {
     method: "Get",
     credentials: "include",
   });
