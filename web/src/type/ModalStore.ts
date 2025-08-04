@@ -1,5 +1,7 @@
+export type ModalType = "productModal" | "headerModal" | null;
+
 export interface ModalStore {
-  isOpen: boolean;
-  open: () => void;
+  modalType: ModalType;
+  open: (type: Exclude<ModalType, null>) => void;
   close: () => void;
 }

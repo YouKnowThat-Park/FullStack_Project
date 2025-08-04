@@ -4,9 +4,7 @@ import { ModalLink } from "./LinkWrapper";
 import { handleLogout } from "@/utils/Logout.ts";
 
 export const MenuModal = () => {
-  const { isOpen, close } = useModalStore();
-
-  if (!isOpen) return null;
+  const { close } = useModalStore();
 
   return (
     <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">

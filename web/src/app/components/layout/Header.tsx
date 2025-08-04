@@ -5,7 +5,7 @@ import { HamburgerIcon } from "@/ui/icon/HamburgerIcon";
 import { MenuModal } from "./_components/MenuModal";
 
 export const Header = () => {
-  const { isOpen, open } = useModalStore();
+  const { modalType, open } = useModalStore();
 
   return (
     <header className="w-full h-16 bg-[#efefef] rounded-lg mt-10 mb-5">
@@ -16,11 +16,11 @@ export const Header = () => {
           <input type="text" className=" border" />
         </div>
 
-        <button onClick={open}>
+        <button onClick={() => open("headerModal")}>
           <HamburgerIcon />
         </button>
       </div>
-      {isOpen && <MenuModal />}
+      {modalType === "headerModal" && <MenuModal />}
     </header>
   );
 };

@@ -1,8 +1,8 @@
-import { ModalStore } from "@/type/ModalStore";
+import { ModalStore, ModalType } from "@/type/ModalStore";
 import { create } from "zustand";
 
 export const useModalStore = create<ModalStore>((set) => ({
-  isOpen: false,
-  open: () => set({ isOpen: true }),
-  close: () => set({ isOpen: false }),
+  modalType: null,
+  open: (type: ModalType) => set({ modalType: type }),
+  close: () => set({ modalType: null }),
 }));
