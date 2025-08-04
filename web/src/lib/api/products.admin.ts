@@ -7,7 +7,10 @@ export const fetchAdminProduct = async (): Promise<AdminProduct[]> => {
 };
 
 export const createProduct = async (
-  product: Omit<AdminProduct, "id" | "created_at">
+  product: Omit<
+    AdminProduct,
+    "sold_count" | "created_at" | "rating" | "updated_at" | "admin_user"
+  >
 ) => {
   const res = await fetch("admin", {
     method: "POST",
