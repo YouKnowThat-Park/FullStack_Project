@@ -1,7 +1,9 @@
 import { AdminProduct } from "@/type/Product";
 
 export const fetchAdminProduct = async (): Promise<AdminProduct[]> => {
-  const res = await fetch("/admin", { cache: "no-store" });
+  const res = await fetch("http://localhost:8000/api/products/admin/", {
+    cache: "no-store",
+  });
   if (!res.ok) throw new Error("상품 목록을 불러오지 못했습니다.");
   return res.json();
 };
