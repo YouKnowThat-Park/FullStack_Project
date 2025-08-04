@@ -14,8 +14,9 @@ export const createProduct = async (
     "sold_count" | "created_at" | "rating" | "updated_at" | "admin_user"
   >
 ) => {
-  const res = await fetch("admin", {
+  const res = await fetch("http://localhost:8000/api/products/admin/", {
     method: "POST",
+    credentials: "include",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(product),
   });
