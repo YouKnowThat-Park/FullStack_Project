@@ -1,13 +1,19 @@
 "use client";
 
 import { useAdminProduct } from "@/hooks/useAdminProduct";
+import { useModalStore } from "@/store/modal-store";
 import { AdminProduct } from "@/type/Product";
+import { ProductModal } from "./_components/ProductModal";
 
 export default function AdminProductsPage() {
   const { data } = useAdminProduct();
+  const { modalType, open } = useModalStore();
 
   return (
     <div>
+      <div>
+        <button onClick={() => open("productModal")}>제품 등록</button>
+      </div>
       {data?.map((product: AdminProduct) => (
         <ul key={product.id} className="border w-fit p-2 mt-2">
           <li>
@@ -33,6 +39,7 @@ export default function AdminProductsPage() {
           </li>
         </ul>
       ))}
+      {modalType === "productModal" && <ProductModal />}
     </div>
   );
 }
