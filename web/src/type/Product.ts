@@ -2,12 +2,14 @@ export interface ProductImage {
   image: string;
 }
 export interface PublicProduct {
+  id: string;
   name: string;
   price: number;
   images: ProductImage[];
 }
 
 export interface AdminProduct {
+  id: string;
   name: string;
   description: string;
   price: number;
