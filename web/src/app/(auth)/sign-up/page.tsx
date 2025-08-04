@@ -3,7 +3,7 @@ import React from "react";
 import { AuthInputField } from "../_components/AuthInputField";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SignUpSchema } from "../schemas/Sign-up_Schema";
+import { SignUpSchema } from "../../schemas/auth/Sign-up_Schema";
 
 interface SignupFormValues {
   name: string;

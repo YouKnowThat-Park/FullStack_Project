@@ -1,7 +1,10 @@
 "use client";
 import { AuthInputField } from "../_components/AuthInputField";
 import { useForm } from "react-hook-form";
-import { SignInFormValues, SignInSchema } from "../schemas/Sign-in_Schema";
+import {
+  SignInFormValues,
+  SignInSchema,
+} from "../../schemas/auth/Sign-in_Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 
