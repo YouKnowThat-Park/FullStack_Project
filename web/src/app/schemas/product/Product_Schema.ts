@@ -19,7 +19,9 @@ export const ProductSchema = z.object({
   description: z.string().min(1, { message: "제품 설명을 입력해주세요." }),
   image: z
     .any()
-    .refine((file) => file instanceof File, "이미지 파일을 업로드해주세요.")
+    .refine((file) => !file || file instanceof File, {
+      message: "이미지 파일을 업로드해주세요.",
+    })
     .optional(),
 });
 
