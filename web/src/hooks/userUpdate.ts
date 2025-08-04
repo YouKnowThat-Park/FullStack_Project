@@ -10,7 +10,7 @@ export const useUpdate = () => {
 
   return useMutation({
     mutationFn: async (data: UpdateUser) => {
-      const res = await fetch("/api/user/change-info", {
+      const res = await fetch("http://localhost:8000/api/users/change/", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
