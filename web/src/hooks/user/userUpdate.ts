@@ -1,4 +1,4 @@
-import { UpdateUser } from "@/type/UpdateUser";
+import { UpdateUser } from "@/type/user/UpdateUser";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 // PATCH를 사용한 이유는 일부 필드만 수정할꺼라서

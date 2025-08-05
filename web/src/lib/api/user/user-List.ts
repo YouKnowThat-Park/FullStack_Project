@@ -1,4 +1,4 @@
-import { PaginatedUserResponse } from "@/type/user";
+import { PaginatedUserResponse } from "@/type/user/user";
 
 export const fetchUserList = async (
   page: number = 1

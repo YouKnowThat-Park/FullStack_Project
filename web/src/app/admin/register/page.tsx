@@ -1,8 +1,8 @@
 "use client";
 
-import { useAdminProduct } from "@/hooks/useAdminProduct";
+import { useAdminProduct } from "@/hooks/product/useAdminProduct";
 import { useModalStore } from "@/store/modal-store";
-import { AdminProduct } from "@/type/Product";
+import { AdminProduct } from "@/type/product/Product";
 import { ProductModal } from "./_components/ProductModal";
 
 export default function AdminProductsPage() {

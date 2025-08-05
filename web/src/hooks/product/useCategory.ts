@@ -1,4 +1,4 @@
-import { fetchProductCategory } from "@/lib/api/products-category";
+import { fetchProductCategory } from "@/lib/api/product/products-category";
 import { useQuery } from "@tanstack/react-query";
 
 export const useCategory = () => {

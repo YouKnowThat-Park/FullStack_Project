@@ -1,6 +1,6 @@
 "use client";
-import { usePublicProductList } from "@/hooks/usePublicProductList";
-import { PublicProduct } from "@/type/Product";
+import { usePublicProductList } from "@/hooks/product/usePublicProductList";
+import { PublicProduct } from "@/type/product/Product";
 import Image from "next/image";
 
 export default function ProductsPage() {

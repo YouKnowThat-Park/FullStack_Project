@@ -1,4 +1,8 @@
-import { AdminProduct, CreateProductInput, ProductImage } from "@/type/Product";
+import {
+  AdminProduct,
+  CreateProductInput,
+  ProductImage,
+} from "@/type/product/Product";
 
 export const fetchAdminProduct = async (): Promise<AdminProduct[]> => {
   const res = await fetch("http://localhost:8000/api/products/admin/", {

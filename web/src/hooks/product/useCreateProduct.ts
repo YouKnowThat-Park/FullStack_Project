@@ -1,5 +1,8 @@
-import { createProduct, uploadProductImage } from "@/lib/api/products.admin";
-import { CreateProductInput } from "@/type/Product";
+import {
+  createProduct,
+  uploadProductImage,
+} from "@/lib/api/product/products.admin";
+import { CreateProductInput } from "@/type/product/Product";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const useCreateProduct = () => {

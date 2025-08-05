@@ -1,9 +1,9 @@
 "use client";
-import { useUser } from "@/hooks/useUser";
+import { useUser } from "@/hooks/user/useUser";
 import { AuthInputField } from "../(auth)/_components/AuthInputField";
 import { useForm } from "react-hook-form";
-import { useUpdate } from "@/hooks/userUpdate";
-import { UpdateUser } from "@/type/UpdateUser";
+import { useUpdate } from "@/hooks/user/userUpdate";
+import { UpdateUser } from "@/type/user/UpdateUser";
 
 export default function page() {
   // React Hook Form 사용

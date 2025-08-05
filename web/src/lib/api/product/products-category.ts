@@ -1,4 +1,4 @@
-import { Category } from "@/type/Category";
+import { Category } from "@/type/product/Category";
 
 export const fetchProductCategory = async (): Promise<Category[]> => {
   const res = await fetch("http://localhost:8000/api/products/categories/", {

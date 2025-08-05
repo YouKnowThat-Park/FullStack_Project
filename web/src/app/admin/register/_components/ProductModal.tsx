@@ -2,9 +2,9 @@ import {
   ProductFormValues,
   ProductSchema,
 } from "@/app/schemas/product/Product_Schema";
-import { useCategory } from "@/hooks/useCategory";
-import { useCreateProduct } from "@/hooks/useCreateProduct";
-import { useUser } from "@/hooks/useUser";
+import { useCategory } from "@/hooks/product/useCategory";
+import { useCreateProduct } from "@/hooks/product/useCreateProduct";
+import { useUser } from "@/hooks/user/useUser";
 import { useModalStore } from "@/store/modal-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";

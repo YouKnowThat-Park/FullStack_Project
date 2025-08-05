@@ -1,4 +1,4 @@
-import { fetchUserList } from "@/lib/api/user-List";
+import { fetchUserList } from "@/lib/api/user/user-List";
 import { useQuery } from "@tanstack/react-query";
 
 export const useUserList = (page: number) => {
