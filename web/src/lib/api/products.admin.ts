@@ -1,4 +1,4 @@
-import { AdminProduct, CreateProductInput } from "@/type/Product";
+import { AdminProduct, CreateProductInput, ProductImage } from "@/type/Product";
 
 export const fetchAdminProduct = async (): Promise<AdminProduct[]> => {
   const res = await fetch("http://localhost:8000/api/products/admin/", {
@@ -24,4 +24,22 @@ export const createProduct = async (
     const data = await res.json();
     throw new Error(data?.detail || "상품 등록을 실패했습니다.");
   }
+  return await res.json();
+};
+
+export const uploadProductImage = async (image: File, productId: number) => {
+  const formData = new FormData();
+  formData.append("image", image);
+  formData.append("product_id", String(productId));
+
+  const res = await fetch("http://localhost:8000/api/products/images/", {
+    method: "POST",
+    credentials: "include",
+    body: formData,
+  });
+  if (!res.ok) {
+    const data = await res.json();
+    throw new Error(data?.message || "이미지 등록에 실패했습니다.");
+  }
+  return await res.json();
 };
