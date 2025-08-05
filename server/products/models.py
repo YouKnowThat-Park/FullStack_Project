@@ -45,7 +45,7 @@ class Product(models.Model):
         return self.name
     
 class ProductImage(models.Model):
-    Product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
     # → ForeignKey는 1 : N / 다른 모델과 관계 설정(Product 모델에 관계를 설정 했음)
     # → on_delete=models.CASCADE : 열견 된 부모 모델이 삭제될 때 해망 모델도 삭제하게 연결
     image = models.ImageField(upload_to='product_images/')
