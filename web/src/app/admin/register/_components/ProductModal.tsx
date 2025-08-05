@@ -16,6 +16,8 @@ export const ProductModal = () => {
   const { data: categories } = useCategory();
   const { mutate } = useCreateProduct();
   const [categoryId, setCategoryId] = useState<number>(0);
+  const [fileName, setFileName] = useState<string>("");
+
   const {
     register,
     handleSubmit,
@@ -26,13 +28,21 @@ export const ProductModal = () => {
   });
 
   const onSubmit = (data: ProductFormValues) => {
-    const finalData = {
-      ...data,
-      category: categoryId,
-      is_active: true,
-    };
-    mutate(finalData);
-    close();
+    mutate(
+      {
+        ...data,
+        category: categoryId,
+        is_active: true,
+      },
+      {
+        onSuccess: () => {
+          close();
+        },
+        onError: (error) => {
+          console.error("등록 실패", error);
+        },
+      }
+    );
   };
 
   return (
@@ -48,20 +58,24 @@ export const ProductModal = () => {
           </button>
         </div>
 
-        {/* <input
+        <input
           type="file"
           accept="image/*"
-          {...register("image")}
           className="border w-full"
           onChange={(e) => {
-            if (e.target.files?.[0]) {
-              setValue("image", e.target.files[0]);
+            const file = e.target.files?.[0];
+            if (file) {
+              setValue("image", file, { shouldValidate: true });
+              setFileName(file.name);
             }
           }}
         />
-        {errors.image && (
+        <p className="text-sm text-gray-500">
+          {fileName || "선택된 파일 없음"}
+        </p>
+        {typeof errors.image?.message === "string" && (
           <p className="text-red-500 text-sm">{errors.image.message}</p>
-        )} */}
+        )}
 
         <input
           type="text"
