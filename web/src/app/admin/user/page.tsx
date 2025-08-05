@@ -1,7 +1,7 @@
 "use client";
 
-import { useUserList } from "@/hooks/useUserList";
-import { useUserSuspension } from "@/hooks/useUserSuspenion";
+import { useUserList } from "@/hooks/user/useUserList";
+import { useUserSuspension } from "@/hooks/user/useUserSuspenion";
 import { useState } from "react";
 
 export default function page() {

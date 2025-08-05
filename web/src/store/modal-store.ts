@@ -1,4 +1,4 @@
-import { ModalStore, ModalType } from "@/type/ModalStore";
+import { ModalStore, ModalType } from "@/type/modal/ModalStore";
 import { create } from "zustand";
 
 export const useModalStore = create<ModalStore>((set) => ({
