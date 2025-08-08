@@ -47,3 +47,23 @@ export const uploadProductImage = async (image: File, productId: number) => {
   }
   return await res.json();
 };
+
+export const editProductItem = async (
+  product: Partial<CreateProductInput>,
+  productId: number
+) => {
+  const res = await fetch(
+    `http://localhost:8000/api/products/admin/${productId}`,
+    {
+      method: "PATCH",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(product),
+    }
+  );
+  if (!res.ok) {
+    const data = await res.json();
+    throw new Error(data?.detail || "상품 수정에 실패했습니다.");
+  }
+  return await res.json();
+};
