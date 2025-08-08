@@ -4,10 +4,15 @@ import { useAdminProduct } from "@/hooks/product/useAdminProduct";
 import { useModalStore } from "@/store/modal-store";
 import { AdminProduct } from "@/type/product/Product";
 import { ProductModal } from "./_components/ProductModal";
+import { useState } from "react";
+import { EditProductModal } from "./_components/EditProductModal";
 
 export default function AdminProductsPage() {
   const { data } = useAdminProduct();
   const { modalType, open } = useModalStore();
+  const [selectedProduct, setSelectedProduct] = useState<AdminProduct | null>(
+    null
+  );
 
   return (
     <div>
@@ -35,11 +40,22 @@ export default function AdminProductsPage() {
             <p>게시 날짜: {product.created_at}</p>
             <p>상태: {product.is_active}</p>
             <p>제품 내용: {product.description}</p>
-            <button className="border rounded-lg">수정</button>
+            <button
+              onClick={() => {
+                setSelectedProduct(product);
+                open("editProductModal");
+              }}
+              className="border rounded-lg"
+            >
+              수정
+            </button>
           </li>
         </ul>
       ))}
       {modalType === "productModal" && <ProductModal />}
+      {modalType === "editProductModal" && selectedProduct && (
+        <EditProductModal product={selectedProduct} />
+      )}
     </div>
   );
 }
