@@ -1,4 +1,8 @@
-export type ModalType = "productModal" | "headerModal" | null;
+export type ModalType =
+  | "productModal"
+  | "headerModal"
+  | "EditProductModal"
+  | null;
 
 export interface ModalStore {
   modalType: ModalType;
