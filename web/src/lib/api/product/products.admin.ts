@@ -67,3 +67,20 @@ export const editProductItem = async (
   }
   return await res.json();
 };
+
+export const getProductById = async (
+  productId: number
+): Promise<CreateProductInput> => {
+  const res = await fetch(
+    `http://localhost:8000/api/products/admin/${productId}`,
+    {
+      cache: "no-store",
+      credentials: "include",
+    }
+  );
+  if (!res.ok) {
+    throw new Error("상품 정보를 불러오지 못했습니다.");
+  }
+  const data = await res.json();
+  return data;
+};
