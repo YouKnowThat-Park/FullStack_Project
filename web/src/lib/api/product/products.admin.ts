@@ -52,15 +52,12 @@ export const editProductItem = async (
   product: Partial<CreateProductInput>,
   productId: number
 ) => {
-  const res = await fetch(
-    `http://localhost:8000/api/products/admin/${productId}`,
-    {
-      method: "PATCH",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(product),
-    }
-  );
+  const res = await fetch(`http://localhost:8000/api/products/${productId}/`, {
+    method: "PATCH",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(product),
+  });
   if (!res.ok) {
     const data = await res.json();
     throw new Error(data?.detail || "상품 수정에 실패했습니다.");
@@ -71,13 +68,10 @@ export const editProductItem = async (
 export const getProductById = async (
   productId: number
 ): Promise<CreateProductInput> => {
-  const res = await fetch(
-    `http://localhost:8000/api/products/admin/${productId}`,
-    {
-      cache: "no-store",
-      credentials: "include",
-    }
-  );
+  const res = await fetch(`http://localhost:8000/api/products/${productId}/`, {
+    cache: "no-store",
+    credentials: "include",
+  });
   if (!res.ok) {
     throw new Error("상품 정보를 불러오지 못했습니다.");
   }
