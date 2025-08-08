@@ -67,6 +67,7 @@ Tanstack Query의 Mutation을 사용하여 사용자 정보 수정
   - name, description, price, discount_price, stok, rating, category
   - 민감 필드는 PublicProductListView에서 exclude 처리
   - 민감 필드 → admin_user, sold_count 등등
+
 - 추후 상품 상세 페이지 제작 예정
 ```
 
@@ -77,8 +78,10 @@ Tanstack Query의 Mutation을 사용하여 사용자 정보 수정
   - 일반 사용자가 볼수 없는 민감한 필드를 전부 보여줌
   - 이미지 등록은 ProductImageCreateView 에서 별도 처리
   - 상품 등록 페이지는 모달로 관리 (모달 상태는 Zustand로 관리)
+
 - 이미지 저장은 ProductImage 모델로 분리 관리, 이미지 필드는 로컬 MEDIA_ROOT에 저장됨
   - 추후 Cloudinary, Supabase, AWS S3등 외부 이미지 스토리지와 통합 예정
+
 - ProductRetrieveUpdateDestroyView를 통해 관리자가 상품 정보 수정 가능 (GET, FATCH)
   - name, price, diiscount_price, description 등 수정 가능
   - getProductById을 사용해 상품 수정 페이지에 기존 데이터 불러오기 (Input에 기존 값이 보이고 수정할 수 있게)
