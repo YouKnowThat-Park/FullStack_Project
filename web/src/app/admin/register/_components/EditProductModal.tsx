@@ -44,7 +44,6 @@ export const EditProductModal = ({ product }: EditProductProps) => {
   }, [categoryId, setValue]);
 
   const onSubmit = (formData: ProductFormValues) => {
-    console.log("왜 안됌;;;:", formData);
     mutate(
       {
         productId: Number(product.id),
