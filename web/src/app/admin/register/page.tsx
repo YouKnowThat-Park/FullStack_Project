@@ -6,6 +6,7 @@ import { AdminProduct } from "@/type/product/Product";
 import { ProductModal } from "./_components/ProductModal";
 import { useState } from "react";
 import { EditProductModal } from "./_components/EditProductModal";
+import { DeleteProductModal } from "./_components/DeleteProductModal";
 
 export default function AdminProductsPage() {
   const { data } = useAdminProduct();
@@ -40,6 +41,7 @@ export default function AdminProductsPage() {
             <p>게시 날짜: {product.created_at}</p>
             <p>상태: {product.is_active}</p>
             <p>제품 내용: {product.description}</p>
+            <button onClick={() => open("deleteProductModal")}>삭제</button>
             <button
               onClick={() => {
                 setSelectedProduct(product);
@@ -53,6 +55,9 @@ export default function AdminProductsPage() {
         </ul>
       ))}
       {modalType === "productModal" && <ProductModal />}
+      {modalType === "deleteProductModal" && selectedProduct && (
+        <DeleteProductModal product={selectedProduct} />
+      )}
       {modalType === "editProductModal" && selectedProduct && (
         <EditProductModal product={selectedProduct} />
       )}
