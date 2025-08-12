@@ -2,6 +2,7 @@ export type ModalType =
   | "productModal"
   | "headerModal"
   | "editProductModal"
+  | "deleteProductModal"
   | null;
 
 export interface ModalStore {
