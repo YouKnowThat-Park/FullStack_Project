@@ -78,3 +78,15 @@ export const getProductById = async (
   const data = await res.json();
   return data;
 };
+
+export const productDelete = async (productId: number) => {
+  const res = await fetch(`http://localhost:8000/api/products/${productId}/`, {
+    method: "DELETE",
+    credentials: "include",
+  });
+  if (!res.ok) {
+    throw new Error("삭제 실패");
+  }
+
+  return true;
+};
