@@ -1,5 +1,5 @@
 import z from "zod";
-import { SignInSchema } from "./Sign-in_Schema";
+import { SignInSchema } from "../../(auth)/schemas/Sign-in_Schema";
 
 export const SignUpSchema = SignInSchema.extend({
   name: z
