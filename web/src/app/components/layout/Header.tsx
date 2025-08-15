@@ -10,15 +10,17 @@ export const Header = () => {
   return (
     <header className="w-full h-16 bg-[#efefef] rounded-lg mt-10 mb-5">
       <div className="flex flex-row items-center gap-4">
-        <Link href="/">Study Project</Link>
+        <Link href="/" className="font-black ml-4 text-2xl">
+          Study Project
+        </Link>
 
-        <div>
-          <input type="text" className=" border" />
+        <div className="ml-auto flex items-center gap-2 p-4">
+          <input type="text" className="border w-[500px] h-8" />
+
+          <button onClick={() => open("headerModal")} className="">
+            <HamburgerIcon />
+          </button>
         </div>
-
-        <button onClick={() => open("headerModal")}>
-          <HamburgerIcon />
-        </button>
       </div>
       {modalType === "headerModal" && <MenuModal />}
     </header>
