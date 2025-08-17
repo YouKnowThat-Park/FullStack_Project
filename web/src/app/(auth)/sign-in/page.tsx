@@ -35,14 +35,21 @@ export default function Page() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <AuthInputField label="Email" type="email" {...register("email")} />
-      <AuthInputField
-        label="Password"
-        type="password"
-        {...register("password")}
-      />
-      <button type="submit">Login</button>
-    </form>
+    <div className="border h-[660px]">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col justify-center items-center border w-[550px] "
+      >
+        <AuthInputField label="Email" type="email" {...register("email")} />
+        <AuthInputField
+          label="Password"
+          type="password"
+          {...register("password")}
+        />
+        <button type="submit" className="border">
+          Login
+        </button>
+      </form>
+    </div>
   );
 }
