@@ -22,7 +22,7 @@ export const AuthInputField = forwardRef<HTMLInputElement, AuthInputField>(
           value={value}
           onBlur={onBlur}
           onChange={onChange}
-          className="border"
+          className="border flex flex-col"
         />
       </div>
     );
