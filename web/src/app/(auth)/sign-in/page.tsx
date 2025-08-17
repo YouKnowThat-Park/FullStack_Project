@@ -35,10 +35,10 @@ export default function Page() {
   };
 
   return (
-    <div className="border h-[660px]">
+    <div className="border h-[660px] flex  justify-center items-center">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col justify-center items-center border w-[550px] "
+        className="flex flex-col justify-center items-center border w-[550px] h-[450px] gap-4 "
       >
         <AuthInputField label="Email" type="email" {...register("email")} />
         <AuthInputField
@@ -46,7 +46,10 @@ export default function Page() {
           type="password"
           {...register("password")}
         />
-        <button type="submit" className="border">
+        <button
+          type="submit"
+          className="border w-[100px] h-[40px] rounded-md bg-blue-500 text-white"
+        >
           Login
         </button>
       </form>
