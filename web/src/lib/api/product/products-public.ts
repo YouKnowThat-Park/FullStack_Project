@@ -13,9 +13,10 @@ export interface PublicProductType {
   images: ProductImage[];
 }
 
-export const fetchPublicProduct = async () => {
+export const fetchPublicProduct = async (): Promise<PublicProductType> => {
   const res = await fetch("http://localhost:8000/api/products/", {
     method: "GET",
+    cache: "no-store",
   });
 
   if (!res.ok) {
