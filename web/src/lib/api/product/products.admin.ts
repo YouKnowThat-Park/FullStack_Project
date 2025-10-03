@@ -60,7 +60,17 @@ export const editProductItem = async (
   });
   if (!res.ok) {
     const data = await res.json();
-    throw new Error(data?.detail || "상품 수정에 실패했습니다.");
+
+    const messages: Record<number, string> = {
+      400: "입력한 정보가 올바르지 않습니다.",
+      401: "로그인이 필요합니다.",
+      403: "관리자 권한이 필요합니다.",
+      404: "상품을 찾을 수 없습니다.",
+      500: "서버 오류가 발생했습니다.",
+    };
+    const message =
+      messages[res.status] ?? data?.detail ?? "상품 수정에 실패했습니다.";
+    throw new Error(message);
   }
   return await res.json();
 };
